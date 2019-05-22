@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -53,3 +52,15 @@ if (token) {
 //     cluster: 'mt1',
 //     encrypted: true
 // });
+
+import Echo from "laravel-echo"
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: `192.168.99.100:6001` ,
+    // host: `${Vue.prototype.$conf.API_IP}:6001` ,
+    auth: {
+        headers: {
+            Authorization: ''
+        }
+    }
+});

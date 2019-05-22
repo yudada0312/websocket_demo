@@ -1,0 +1,39 @@
+version: '3'
+networks:
+  app-tier:
+    driver: bridge
+volumes:
+    sql-data:    
+services:
+    echo-server:
+        image: yudada/echo-server
+        container_name: echo_server
+        ports:
+          - 6001:6001
+        volumes:
+            - "${APP_PATH}/laravel-echo-server.json:/opt/laravel-echo-server/laravel-echo-server.json"
+        networks:
+           - app-tier    
+    nginx:
+        image: yudada/nginx
+        container_name: nginx
+        ports:
+            - 880:80
+        volumes:
+            - "${APP_PATH}:/usr/share/nginx/html"
+        depends_on: 
+            - php-fpm
+    php-fpm:
+        image: yudada/laravel-www
+        container_name: php-fpm
+        environment:
+            CONTAINER_ROLE: app
+        volumes:
+            - "${APP_PATH}:/var/www/html"
+    redis:
+      container_name: redis
+      image: redis:4.0.10-alpine
+      command: ["redis-server", "--appendonly", "yes"]
+      restart: always
+      ports:
+          - "6379:6379"  

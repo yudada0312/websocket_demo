@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +10,14 @@
 |
 */
 
+//會員監聽個人頻道時，驗證身分
+Route::post('/broadcasting/auth', function(){
+
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('demo1', 'Controller@demo1');
+Route::get('demo2', 'Controller@demo2');
