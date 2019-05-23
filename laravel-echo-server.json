@@ -1,5 +1,5 @@
 {
-	"authHost": "192.168.99.100:880",
+	"authHost": "10.0.75.1:880",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 	],
@@ -7,7 +7,7 @@
 	"databaseConfig": {
 		"redis": {
 			"port": "6379",
-			"host": "192.168.99.100"
+			"host": "redis"
 		},
 		"sqlite": {
 			"databasePath": "/database/laravel-echo-server.sqlite"

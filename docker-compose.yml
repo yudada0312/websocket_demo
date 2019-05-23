@@ -11,7 +11,7 @@ services:
         ports:
           - 6001:6001
         volumes:
-            - "${APP_PATH}/laravel-echo-server.json:/opt/laravel-echo-server/laravel-echo-server.json"
+            - "$APP_PATH/laravel-echo-server.json:/opt/laravel-echo-server/laravel-echo-server.json"
         networks:
            - app-tier    
     nginx:
@@ -20,20 +20,26 @@ services:
         ports:
             - 880:80
         volumes:
-            - "${APP_PATH}:/usr/share/nginx/html"
-        depends_on: 
+            - "$APP_PATH:/usr/share/nginx/html"
+        depends_on:
             - php-fpm
+        networks:
+            - app-tier
     php-fpm:
         image: yudada/laravel-www
         container_name: php-fpm
         environment:
             CONTAINER_ROLE: app
         volumes:
-            - "${APP_PATH}:/var/www/html"
+            - "$APP_PATH:/var/www/html"
+        networks:
+            - app-tier
     redis:
       container_name: redis
       image: redis:4.0.10-alpine
       command: ["redis-server", "--appendonly", "yes"]
       restart: always
       ports:
-          - "6379:6379"  
+        - "6379:6379"
+      networks:
+        - app-tier

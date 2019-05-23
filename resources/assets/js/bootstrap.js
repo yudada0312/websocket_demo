@@ -56,7 +56,7 @@ if (token) {
 import Echo from "laravel-echo"
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: `192.168.99.100:6001` ,
+    host: `${process.env.MIX_API_IP}:6001` ,
     // host: `${Vue.prototype.$conf.API_IP}:6001` ,
     auth: {
         headers: {
