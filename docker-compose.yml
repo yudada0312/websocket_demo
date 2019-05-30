@@ -1,9 +1,9 @@
 version: '3'
 networks:
-  app-tier:
-    driver: bridge
+   app-tier:
+        driver: bridge
 volumes:
-    sql-data:    
+    sql-data:
 services:
     echo-server:
         image: yudada/echo-server
@@ -15,7 +15,7 @@ services:
         volumes:
             - "${APP_PATH}/laravel-echo-server.json:/opt/laravel-echo-server/laravel-echo-server.json"
         networks:
-           - app-tier    
+            - app-tier  
     nginx:
         image: yudada/nginx
         container_name: nginx
